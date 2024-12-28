@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worduzz Modifier</title>
+    <style>
+        body {
+            text-align: center;
+            font-family:Arial, Helvetica, sans-serif
+        }
+        
+        button {
+            margin: 10px;
+            margin-top: 20px;
+            height: 30px;
+            width: 100px;
+        }
+
+        input {
+            height: 25px;
+        }
+
+        span {
+            font-size: 20px;
+            font-family: Georgia, 'Times New Roman', Times, serif
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Worduzz Modifier</h1>
+    <label>Enter a word - We'll uzz it for you!</label>
+    <br>
+    <input type="text" id="inputField" name="word">
+    <button id="uzzbutton" onclick="uzz()">Uzz-ify</button>
+    <br>
+    <strong>New Word: <span id="newWord"></span></strong>
+
+    <script>
+        function uzz() {
+            const inputField = document.getElementById('inputField');
+            const uzzy = document.getElementById('newWord')
+            const word = inputField.value
+
+            const vowels = /[aeiou]/i;
+            let lastVowelIndex = -1;
+
+            for (let i = word.length - 1; i >= 0; i--) {
+                if (vowels.test(word[i])) {
+                    lastVowelIndex = i;
+                    break;
+                }
+            }
+
+            let modifiedWord;
+            if (lastVowelIndex !== -1) {
+                modifiedWord = word.slice(0, lastVowelIndex) + "uzz";
+            } else {
+                modifiedWord = word + "uzz";
+            }
+
+            uzzy.textContent = modifiedWord;
+        }
+
+    </script>
+</body>
+
+</html>
